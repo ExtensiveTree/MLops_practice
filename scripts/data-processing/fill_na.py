@@ -22,21 +22,21 @@ def process_data(fd_in, fd_out):
     arr_log_quality = []
     for line in fd_in:
         line = line.rstrip('\n').split(',')
-        arr_fixed_acidity.append(line[1])
-        arr_volatile_acidity.append(line[2])
-        arr_citric_acid.append(line[3])
-        if line[4]:
-            arr_residual_sugar.append(float(line[4]))
+        arr_fixed_acidity.append(line[0])
+        arr_volatile_acidity.append(line[1])
+        arr_citric_acid.append(line[2])
+        if line[3]:
+            arr_residual_sugar.append(float(line[3]))
         else:
             arr_residual_sugar.append(0)
-        arr_chlorides.append(line[5])
-        arr_density.append(line[7])
-        if line[8]:
-            arr_pH.append(float(line[8]))
+        arr_chlorides.append(line[4])
+        arr_density.append(line[5])
+        if line[6]:
+            arr_pH.append(float(line[6]))
         else:
             arr_pH.append(0)
-        arr_alcohol.append(line[10])
-        arr_log_quality.append(line[11])
+        arr_alcohol.append(line[7])
+        arr_log_quality.append(line[8])
 
     s_suga = sum(arr_residual_sugar)
     s_pH = sum(arr_pH)
@@ -45,7 +45,7 @@ def process_data(fd_in, fd_out):
         if arr_pH[i] == 0:
             arr_pH[i] = round(s_pH / len(arr_pH), 2)
     
-    for i in range(len(s_suga)):
+    for i in range(len(arr_residual_sugar)):
         if arr_residual_sugar[i]:
             arr_residual_sugar[i] = round(s_suga / len(arr_residual_sugar), 2)
     
