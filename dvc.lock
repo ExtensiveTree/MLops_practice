@@ -26,11 +26,25 @@ stages:
       size: 42055
     - path: scripts/data-processing/fill_na.py
       hash: md5
-      md5: 880e522dc22f35de56451fc612a5eee9
-      size: 2109
+      md5: 0277a85cc282070118264554be70172a
+      size: 2103
     outs:
     - path: data/stage2
       hash: md5
       md5: 680ec0783578e2132001d9ed7e20ebf3.dir
       size: 40343
       nfiles: 1
+  split:
+    cmd: python3 scripts/data-processing/train_test_split.py data/stage2/train.csv
+    deps:
+    - path: data/stage2/train.csv
+      hash: md5
+      md5: e02085c51bb2a75d46331407cb00f7a0
+      size: 40343
+    - path: scripts/data-processing/train_test_split.py
+      hash: md5
+      md5: 51e558709a43f1885883053cca153202
+      size: 975
+    params:
+      params.yaml:
+        split.split_ratio: 0.3

@@ -13,3 +13,10 @@ stages:
     - scripts/data-processing/fill_na.py
     outs:
     - data/stage2
+  split:
+    cmd: python3 scripts/data-processing/train_test_split.py data/stage2/train.csv
+    deps:
+    - data/stage2/train.csv
+    - scripts/data-processing/train_test_split.py
+    params:
+    - split.split_ratio
