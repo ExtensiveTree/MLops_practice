@@ -1,0 +1,36 @@
+schema: '2.0'
+stages:
+  get_features:
+    cmd: python3 scripts/data-processing/get_features.py data/raw/Train
+    deps:
+    - path: data/raw/Train
+      hash: md5
+      md5: 133844edec39d291f8792e3baf876537
+      size: 55649
+    - path: scripts/data-processing/get_features.py
+      hash: md5
+      md5: 48173b1c455e8d0ab91faa5b0f91c1eb
+      size: 1016
+    outs:
+    - path: data/stage1
+      hash: md5
+      md5: b74e2f6c5713d0c21ce0aaee827efe22.dir
+      size: 42055
+      nfiles: 1
+  fill_na:
+    cmd: python3 scripts/data-processing/fill_na.py data/stage1/train.csv
+    deps:
+    - path: data/stage1/train.csv
+      hash: md5
+      md5: f3f25aee89cdf9360a1655d81e632332
+      size: 42055
+    - path: scripts/data-processing/fill_na.py
+      hash: md5
+      md5: 880e522dc22f35de56451fc612a5eee9
+      size: 2109
+    outs:
+    - path: data/stage2
+      hash: md5
+      md5: 680ec0783578e2132001d9ed7e20ebf3.dir
+      size: 40343
+      nfiles: 1
