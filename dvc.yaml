@@ -20,3 +20,13 @@ stages:
     - scripts/data-processing/train_test_split.py
     params:
     - split.split_ratio
+  train:
+    cmd: python3 scripts/model_learning/dt.py data/stage3/train.csv model.pkl
+    deps:
+    - data/stage3/train.csv
+    - scripts/model_learning/dt.py
+    params:
+    - train.max_depth
+    - train.seed
+    outs:
+    - models/model.pkl

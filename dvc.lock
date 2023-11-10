@@ -43,8 +43,28 @@ stages:
       size: 40343
     - path: scripts/data-processing/train_test_split.py
       hash: md5
-      md5: 51e558709a43f1885883053cca153202
+      md5: 34c3e8c26d7dc3a137d009356bbf716b
       size: 975
     params:
       params.yaml:
         split.split_ratio: 0.3
+  train:
+    cmd: python3 scripts/model_learning/dt.py data/stage3/train.csv model.pkl
+    deps:
+    - path: data/stage3/train.csv
+      hash: md5
+      md5: c8c8534c248fbe93fcc6ac1b0137b3ce
+      size: 28206
+    - path: scripts/model_learning/dt.py
+      hash: md5
+      md5: 962a751cd7759b07423358fcd8f049fc
+      size: 720
+    params:
+      params.yaml:
+        train.max_depth: 5
+        train.seed: 42
+    outs:
+    - path: models/model.pkl
+      hash: md5
+      md5: 444a5b904f3dd41fa2f2c4f73bc70398
+      size: 4547
